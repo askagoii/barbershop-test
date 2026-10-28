@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="mn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Миний захиалга</title><link rel="stylesheet" href="/style.css"></head><body>
+  <div class="pole"></div><nav><div class="wrap"><b>💈 33.haircut</b><a href="/">Нүүр</a><a href="/book.html">Захиалах</a><a href="/manage.html">Миний захиалга</a></div></nav>
+  <div class="wrap">
+  <h1 id="title">Захиалгаа олох</h1>
+  <div class="card" id="find"><label>Захиалгын код<input id="code" placeholder="жишээ: 9F2A41C0"></label><button class="cta" id="look">Хайх</button></div>
+  <div class="card" id="detail" hidden><h2 id="what"></h2><p id="when"></p><p class="hint">Код: <b id="c"></b>. 5 минутын өмнө ирнэ үү.</p><button class="cta" id="cancel">Захиалгаа цуцлах</button></div>
+  <p class="err" id="err" role="alert"></p>
+  </div>
+  <script>
+  const $=id=>document.getElementById(id), q=new URLSearchParams(location.search);
+  async function look(code){
+    $("err").textContent="";
+    const r=await fetch("/api/booking/"+encodeURIComponent(code)), j=await r.json();
+    if(!r.ok){$("detail").hidden=true;$("err").textContent=j.error;return}
+    $("find").hidden=true;$("detail").hidden=false;
+    $("title").textContent=q.get("new")?"Таны захиалга баталгаажлаа, "+j.name+"!":"Таны захиалга";
+    $("what").textContent=j.service+" · "+j.barber;
+    $("when").textContent=new Date(j.date+"T00:00").toLocaleDateString("mn",{weekday:"long",month:"long",day:"numeric"})+", "+j.time+" цагт";
+    $("c").textContent=j.code;
+    $("cancel").onclick=async()=>{
+      if(!confirm("Энэ захиалгыг цуцлах уу?"))return;
+      const d=await fetch("/api/booking/"+j.code,{method:"DELETE"});
+      if(d.ok){$("detail").hidden=true;$("title").textContent="Захиалга цуцлагдлаа"}
+    };
+  }
+  $("look").onclick=()=>look($("code").value.trim());
+  if(q.get("code"))look(q.get("code"));
+  </script></body></html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="mn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>33.haircut</title><link rel="stylesheet" href="/style.css"></head><body>
+  <div class="pole"></div><nav><div class="wrap"><b>💈 33.haircut</b><a href="/">Нүүр</a><a href="/book.html">Захиалах</a><a href="/manage.html">Миний захиалга</a></div></nav>
+  <div class="wrap">
+  <h1>Цэвэр засалт, хүлээлтгүй.</h1>
+  <p class="hint">Даваа–Бямба гаригт 9:00–18:00 цагт нээлттэй.</p>
+  <p><a class="btn" href="/book.html">Цаг захиалах</a></p>
+  <div class="card"><h2>Үйлчилгээ</h2><div id="prices"></div></div>
+  <div class="card"><h2>Үсчид</h2><p id="team"></p></div>
+  <p class="hint">Үсчин үү? <a href="/admin.html">Самбарт нэвтрэх</a></p>
+  </div>
+  <script>
+  fetch("/api/config").then(r=>r.json()).then(c=>{
+    c.services.forEach(s=>{const d=document.createElement("div");d.className="price";
+      const a=document.createElement("span");a.textContent=s.name+" ("+s.min+" мин)";
+      const b=document.createElement("b");b.textContent="€"+s.price;d.append(a,b);document.getElementById("prices").append(d)});
+    document.getElementById("team").textContent=c.barbers.map(b=>b.name).join(", ");
+  });
+  </script></body></html>

@@ -1,0 +1,154 @@
+:root{--bg:#f3f5f7;--panel:#fff;
+    --ink:#12203a;
+    --mute:#5b6678;
+    --line:#d9dee6;
+    --accent:#c8312b;
+    --on:#fff;
+    --blue:#1f4fa3;
+    color-scheme:light}
+@media(prefers-color-scheme:dark){
+    :root{--bg:#0f1626;
+        --panel:#172036;
+        --ink:#eef1f7;
+        --mute:#9aa6bb;
+        --line:#2a3553;
+        --accent:#ef5a52;
+        --on:#1a0806;
+        --blue:#7ea4ee;
+        color-scheme:dark}}
+*{
+    box-sizing:border-box
+}
+    body{
+        margin:0;
+        background:var(--bg);
+        color:var(--ink);
+        font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif
+    }
+    .pole{
+        height:10px;
+        background:repeating-linear-gradient(135deg,var(--accent) 0 14px,var(--panel) 14px 28px,var(--blue) 28px 42px,var(--panel) 42px 56px)
+    }
+    nav{
+        background:var(--panel);
+        border-bottom:1px solid var(--line)
+    }
+    nav .wrap{
+        display:flex;
+        gap:18px;
+        align-items:center;
+        padding-top:12px;padding-bottom:12px}
+    nav b{font-size:1.2rem;margin-right:auto}
+    nav a{color:var(--ink);text-decoration:none}
+    nav a:hover{text-decoration:underline}
+    .wrap{
+        max-width:960px;margin:0 auto;padding:0 20px}
+    h1{font-size:clamp(2rem,6vw,3.4rem);
+        line-height:1.05;
+        margin:28px 0 8px;
+        letter-spacing:-.02em}
+    h2{font-size:1.15rem;
+        margin:0 0 12px}
+    .card{
+        background:var(--panel);
+        border:1px solid var(--line);
+        border-radius:14px;
+        padding:18px;
+        margin:16px 0}
+    .grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+        gap:10px}
+    .price{
+        display:flex;
+        justify-content:space-between;
+        border-top:1px solid var(--line);
+        padding:10px 0}
+    .price:first-of-type{border-top:0}
+    button,.btn{
+        font:inherit;
+        cursor:pointer;
+        color:inherit}
+    .btn,.cta{
+        display:inline-block;
+        padding:12px 20px;
+        border:0;
+        border-radius:10px;
+        background:var(--accent);
+        color:var(--on);
+        font-weight:700;
+        text-decoration:none}
+    .cta:disabled{opacity:.4;
+        cursor:not-allowed}
+    .opt{text-align:left;
+        background:var(--bg);
+        border:1.5px solid var(--line);
+        border-radius:10px;
+        padding:10px 12px}
+    .opt span{display:block;
+        color:var(--mute);
+        font-size:.875rem}
+    .opt[aria-pressed=true]{
+        border-color:var(--accent);
+        box-shadow:inset 0 0 0 1px var(--accent)}
+    .days{display:flex;
+        gap:8px;
+        overflow-x:auto;
+        padding-bottom:6px}
+    .day{
+        flex:0 0 58px;
+        text-align:center;
+        background:var(--bg);
+        border:1.5px solid var(--line);
+        border-radius:10px;
+        padding:8px 0}
+    .day small{display:block;
+        color:var(--mute)}
+    .day[aria-pressed=true]{
+        background:var(--ink);
+        color:var(--bg)}.day[aria-pressed=true] small{color:inherit}
+    .slots{
+        display:grid;
+        grid-template-columns:repeat(auto-fill,minmax(82px,1fr));
+        gap:8px}
+    .slot{background:var(--bg);
+        border:1.5px solid var(--line);
+        border-radius:8px;
+        padding:8px 0}
+    .slot[aria-pressed=true]{background:var(--accent);
+        color:var(--on);
+        border-color:var(--accent)}
+    button:disabled{opacity:.4;
+        cursor:not-allowed}.slot:disabled,.day:disabled{text-decoration:line-through}
+    label{
+        display:block;
+        font-weight:600;
+        font-size:.9rem;
+        margin-bottom:10px}
+    input{display:block;
+        width:100%;
+        margin-top:4px;
+        font:inherit;
+        padding:10px 12px;
+        border-radius:8px;
+        border:1.5px solid var(--line);
+        background:var(--bg);
+        color:var(--ink)}
+    .hint{color:var(--mute)}.err{color:var(--accent);font-weight:600}
+    .row{
+        display:grid;
+        grid-template-columns:70px 1fr auto;
+        gap:12px;align-items:center;
+        padding:10px 0;
+        border-top:1px solid var(--line)}
+    .row small{display:block;
+        color:var(--mute)}.row button{background:none;
+            border:1.5px solid var(--line);
+            border-radius:8px;
+            padding:6px 10px}
+    .dayhead{
+        font-weight:800;
+        margin-top:16px}
+    :focus-visible{
+        outline:3px solid var(--blue);
+        outline-offset:2px}
